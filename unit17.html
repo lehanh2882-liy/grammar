@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unit 17 · In the city</title>
+<style>
+/* VOICE: điềm tĩnh, gọn gàng, chuyên nghiệp
+   IDEA: trang vở mở trên nền cành lá mờ và ánh sáng
+   PICTURE: nền mờ mô phỏng ảnh cành lá, chuyển hết sang một họ màu xanh
+   COLOUR and TYPE: đúng 3 màu cùng họ: navy #082a64, xanh dương #136bc4, xanh rất nhạt #e6f0fb (+ trắng); Arial
+   LAYOUT: tiêu đề + thanh 5 mục cố định, mỗi lần chỉ hiện một mục */
+:root{color-scheme:light;--navy:#082a64;--blue:#136bc4;--pale:#e6f0fb;--ink:#082a64;--muted:#4f6a8c;--line:#d3e3f4;--paper:rgba(255,255,255,.95)}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:0}
+body{margin:0;font:17px/1.6 Arial,"Helvetica Neue",sans-serif;color:var(--ink);background:var(--pale);min-height:100vh;padding:20px;overflow-x:clip}
+.bg{position:fixed;inset:-40px;z-index:-1;pointer-events:none;background:linear-gradient(100deg,#cfe2f6 0%,#e6f0fb 45%,#d9e8f8 75%,#c6dcf3 100%)}
+.bg .bok{position:absolute;inset:0;background:radial-gradient(circle at 8% 70%,rgba(255,255,255,0.7) 0 30px,transparent 34px),radial-gradient(circle at 16% 22%,rgba(255,255,255,0.45) 0 46px,transparent 50px),radial-gradient(circle at 27% 86%,rgba(255,255,255,0.5) 0 22px,transparent 26px),radial-gradient(circle at 40% 12%,rgba(255,255,255,0.55) 0 36px,transparent 40px),radial-gradient(circle at 52% 62%,rgba(255,255,255,0.35) 0 54px,transparent 58px),radial-gradient(circle at 63% 30%,rgba(255,255,255,0.6) 0 26px,transparent 30px),radial-gradient(circle at 71% 82%,rgba(255,255,255,0.65) 0 40px,transparent 44px),radial-gradient(circle at 82% 45%,rgba(255,255,255,0.7) 0 30px,transparent 34px),radial-gradient(circle at 90% 14%,rgba(255,255,255,0.6) 0 48px,transparent 52px),radial-gradient(circle at 95% 72%,rgba(255,255,255,0.75) 0 24px,transparent 28px),radial-gradient(circle at 34% 45%,rgba(255,255,255,0.3) 0 18px,transparent 22px),radial-gradient(circle at 76% 6%,rgba(255,255,255,0.5) 0 16px,transparent 20px);filter:blur(5px)}
+.bg svg{position:absolute;width:min(1100px,95vw);right:-4vw;top:8vh;filter:blur(3px);opacity:.7}
+.bg svg.b2{width:min(700px,70vw);left:-8vw;right:auto;top:auto;bottom:-6vh;filter:blur(9px);opacity:.45;transform:scaleX(-1)}
+.app{max-width:1080px;margin:auto;border:1px solid rgba(255,255,255,.8);border-radius:22px;overflow:hidden;box-shadow:0 24px 60px rgba(8,42,100,.12)}
+.hero{position:relative;overflow:hidden;padding:30px 32px 32px;background:linear-gradient(120deg,rgba(255,255,255,.7),rgba(255,255,255,.35));display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:30px;align-items:center}
+.brand{display:flex;align-items:center;gap:14px}.round{font-size:25px;line-height:.95;font-weight:900;letter-spacing:-1px;color:var(--navy)}.sub{font-size:14px;margin-top:5px;color:var(--muted)}
+.disc{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--navy);color:#fff;font-size:22px;font-weight:700}
+.hero h1{font-size:clamp(32px,4.2vw,44px);line-height:1.08;margin:22px 0 10px;color:var(--navy);letter-spacing:-.5px;text-wrap:balance}
+.hero p{margin:0;max-width:540px}
+.ladder{position:relative;z-index:1;display:flex;flex-direction:column-reverse;gap:8px}
+.rung{background:#fff;border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:10px;padding:9px 12px;font-size:16px;box-shadow:0 2px 8px rgba(8,42,100,.06);display:flex;gap:10px;align-items:baseline;opacity:0;transform:translateX(-12px);animation:in .5s forwards}
+.rung b.n{flex:none;width:24px;height:24px;border-radius:50%;background:var(--pale);color:var(--navy);display:grid;place-items:center;font-size:13px}
+.rung:nth-child(1){width:52%}.rung:nth-child(2){width:64%;animation-delay:.15s}.rung:nth-child(3){width:78%;animation-delay:.3s}.rung:nth-child(4){width:88%;animation-delay:.45s}.rung:nth-child(5){width:100%;animation-delay:.6s}
+@keyframes in{to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.rung{animation:none;opacity:1;transform:none}}
+mark{border-radius:4px;padding:0 3px;color:inherit;background:none}
+.m-adj,.m-new{background:#d6e7f9}
+.m-very{color:var(--blue);font-weight:700}
+.m-con{color:var(--navy);font-weight:700;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+nav.steps{position:sticky;top:0;z-index:5;display:flex;gap:6px;overflow-x:auto;padding:10px 18px;background:#fff;border-bottom:1px solid var(--line)}
+nav.steps a{flex:none;text-decoration:none;color:var(--navy);font-size:16px;font-weight:700;padding:10px 17px;border-radius:999px}
+nav.steps a.on{background:var(--navy);color:#fff}
+nav.steps a:not(.on):hover,nav.steps a:focus-visible{background:var(--pale);outline:none}
+section{padding:30px clamp(16px,3.5vw,36px);background:var(--paper);min-height:60vh}
+section[hidden]{display:none}
+.next{margin-top:24px;display:flex;justify-content:flex-end}
+a.go{display:inline-flex;align-items:center;min-height:46px;padding:8px 20px;border-radius:10px;background:var(--blue);color:#fff;text-decoration:none;font-weight:700}a.go:hover{background:var(--navy)}
+h2{font-size:26px;margin:0 0 6px;color:var(--navy);letter-spacing:-.3px}
+.lead{color:var(--muted);margin:0 0 20px;max-width:70ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,310px),1fr));gap:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.card h3{margin:0;font-size:18px}.card .ref{font-size:14px;color:var(--muted);margin:3px 0 12px}
+.card.known{background:var(--pale)}.card.known h3:after{content:" ✓ đã biết";color:var(--blue);font-size:14px;font-weight:400}
+.gbody{display:none;border-top:1px dashed var(--line);margin-top:12px;padding-top:12px;font-size:16px}.card.open .gbody{display:block}
+.gbody table{border-collapse:collapse;margin:6px 0;font-size:16px}.gbody td{padding:3px 12px 3px 0;vertical-align:top}
+.ex{color:var(--blue)}.ex:before{content:"→ ";color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button,.btn{font:inherit;font-size:16px;font-weight:700;min-height:46px;padding:8px 17px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--navy);cursor:pointer;transition:background .15s,border-color .15s}
+button:hover{background:var(--pale)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid rgba(19,107,196,.3);outline-offset:1px}
+button.pri{background:var(--blue);border-color:var(--blue);color:#fff}button.pri:hover{background:var(--navy)}
+button.sm{min-height:40px;padding:5px 13px;font-size:15px}
+button:disabled{opacity:.45;cursor:not-allowed}
+.words{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:8px 13px;min-height:46px;cursor:pointer;font:inherit;background:#fff;color:var(--navy)}
+.chip b{font-size:17px}.chip span{color:var(--muted);font-size:15px}
+.chip.adj{background:#d6e7f9;border-color:#d6e7f9}.chip.very b{color:var(--blue)}.chip.con{background:var(--navy);border-color:var(--navy)}.chip.con b,.chip.con span{color:#fff}
+.chip:hover{border-color:var(--blue)}
+.step{margin:0 0 16px}.step h3{margin:0 0 4px;font-size:19px;display:flex;gap:10px;align-items:center}
+.step h3 i{font-style:normal;flex:none;width:32px;height:32px;border-radius:9px;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:15px}
+.hint{font-size:15px;color:var(--muted);margin:0 0 10px}
+ol.q{margin:0 0 10px;padding-left:24px}ol.q li{margin:10px 0}
+select,input[type=text],textarea{font:inherit;font-size:17px;border:1px solid #bcd3ec;border-radius:9px;padding:8px 10px;background:#fff;color:var(--ink)}
+select{min-height:42px}input[type=text]{width:100%;min-height:46px}
+textarea{width:100%;min-height:210px;line-height:1.7;resize:vertical}
+.good{border:2px solid var(--blue)!important;background:var(--pale)!important}.wrong{border:2px dashed var(--navy)!important;background:#fff!important}
+.fb{font-size:15px;margin-top:4px;min-height:1em}.fb.ok{color:var(--blue)}.fb.ok:before{content:"✓ "}.fb.no{color:var(--navy)}.fb.no:before{content:"✗ "}
+.tiles{display:flex;flex-wrap:wrap;gap:6px;min-height:52px;padding:6px;border-radius:10px}
+.tiles.ans{border:1.5px dashed #bcd3ec;background:#fff}.tile{min-height:42px;padding:6px 13px;font-weight:400}
+.mine{display:grid;gap:12px}.mine label{font-weight:700;font-size:16px}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.plan{display:grid;gap:9px}.plan label{font-size:15px;font-weight:700}
+.model{background:var(--pale);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:10px;display:none}.model.show{display:block}
+.model b{color:var(--navy)}.model p{margin:6px 0 0;line-height:1.75}
+.cmp{width:100%;border-collapse:collapse;font-size:16px;margin-top:10px}.cmp th,.cmp td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}.cmp th{font-size:14px;color:var(--muted)}
+.preview{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;min-height:80px;line-height:1.85;white-space:pre-wrap}
+.stats{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;font-size:15px}.stats span{background:var(--pale);color:var(--navy);border-radius:999px;padding:3px 11px}
+.checks{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.checks li{display:grid;grid-template-columns:32px minmax(0,1fr);gap:8px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.checks .st{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#fff;background:var(--line)}
+.checks li.pass{background:var(--pale)}.checks li.pass .st{background:var(--blue)}.checks li small{display:block;color:var(--muted);font-size:14px}
+.grp{font-size:14px;font-weight:700;color:var(--muted);margin:16px 0 6px}
+.score{font-size:24px;font-weight:700;color:var(--navy);margin:14px 0 0}
+.foot{padding:14px 32px;font-size:14px;color:var(--muted);background:#fff;border-top:1px solid var(--line)}
+@media(max-width:760px){body{padding:0}.app{border-radius:0;border:0}.hero{grid-template-columns:1fr;padding:22px 18px}.cols{grid-template-columns:1fr}.rung{font-size:15px}}
+
+nav.steps a.home{font-weight:400;color:var(--muted)}
+.model .lbl{display:block;margin-bottom:2px}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"><div class="bok"></div><svg viewBox="0 0 900 420" aria-hidden="true"><defs><linearGradient id="lg1" x1="0" x2="1"><stop offset="0" stop-color="#bcd6f1"/><stop offset="1" stop-color="#8fb8e4"/></linearGradient><path id="lf1" d="M0 0C10-9 30-12 48 0C30 11 10 9 0 0Z"/></defs><path d="M60 360C260 300 420 230 620 160S820 80 880 60" stroke="#6f9fd2" stroke-width="3" fill="none" opacity=".7"/><use href="#lf1" transform="translate(120 330) rotate(-40) scale(1)" fill="url(#lg1)"/><use href="#lf1" transform="translate(180 300) rotate(-55) scale(0.9)" fill="url(#lg1)"/><use href="#lf1" transform="translate(240 280) rotate(-20) scale(1.1)" fill="url(#lg1)"/><use href="#lf1" transform="translate(300 250) rotate(-60) scale(1)" fill="url(#lg1)"/><use href="#lf1" transform="translate(360 240) rotate(-15) scale(1.2)" fill="url(#lg1)"/><use href="#lf1" transform="translate(420 205) rotate(-50) scale(1.1)" fill="url(#lg1)"/><use href="#lf1" transform="translate(480 195) rotate(-10) scale(1.3)" fill="url(#lg1)"/><use href="#lf1" transform="translate(540 160) rotate(-45) scale(1.2)" fill="url(#lg1)"/><use href="#lf1" transform="translate(600 150) rotate(-5) scale(1.4)" fill="url(#lg1)"/><use href="#lf1" transform="translate(660 120) rotate(-40) scale(1.2)" fill="url(#lg1)"/><use href="#lf1" transform="translate(720 110) rotate(0) scale(1.3)" fill="url(#lg1)"/><use href="#lf1" transform="translate(780 80) rotate(-35) scale(1.1)" fill="url(#lg1)"/><use href="#lf1" transform="translate(830 70) rotate(10) scale(1.2)" fill="url(#lg1)"/><use href="#lf1" transform="translate(260 300) rotate(40) scale(0.9)" fill="url(#lg1)"/><use href="#lf1" transform="translate(380 265) rotate(35) scale(1)" fill="url(#lg1)"/><use href="#lf1" transform="translate(500 220) rotate(45) scale(1.1)" fill="url(#lg1)"/><use href="#lf1" transform="translate(620 175) rotate(30) scale(1.2)" fill="url(#lg1)"/><use href="#lf1" transform="translate(740 130) rotate(40) scale(1.1)" fill="url(#lg1)"/></svg><svg class="b2" viewBox="0 0 900 420" aria-hidden="true"><defs><linearGradient id="lg2" x1="0" x2="1"><stop offset="0" stop-color="#bcd6f1"/><stop offset="1" stop-color="#8fb8e4"/></linearGradient><path id="lf2" d="M0 0C10-9 30-12 48 0C30 11 10 9 0 0Z"/></defs><path d="M60 360C260 300 420 230 620 160S820 80 880 60" stroke="#6f9fd2" stroke-width="3" fill="none" opacity=".7"/><use href="#lf2" transform="translate(120 330) rotate(-40) scale(1)" fill="url(#lg2)"/><use href="#lf2" transform="translate(180 300) rotate(-55) scale(0.9)" fill="url(#lg2)"/><use href="#lf2" transform="translate(240 280) rotate(-20) scale(1.1)" fill="url(#lg2)"/><use href="#lf2" transform="translate(300 250) rotate(-60) scale(1)" fill="url(#lg2)"/><use href="#lf2" transform="translate(360 240) rotate(-15) scale(1.2)" fill="url(#lg2)"/><use href="#lf2" transform="translate(420 205) rotate(-50) scale(1.1)" fill="url(#lg2)"/><use href="#lf2" transform="translate(480 195) rotate(-10) scale(1.3)" fill="url(#lg2)"/><use href="#lf2" transform="translate(540 160) rotate(-45) scale(1.2)" fill="url(#lg2)"/><use href="#lf2" transform="translate(600 150) rotate(-5) scale(1.4)" fill="url(#lg2)"/><use href="#lf2" transform="translate(660 120) rotate(-40) scale(1.2)" fill="url(#lg2)"/><use href="#lf2" transform="translate(720 110) rotate(0) scale(1.3)" fill="url(#lg2)"/><use href="#lf2" transform="translate(780 80) rotate(-35) scale(1.1)" fill="url(#lg2)"/><use href="#lf2" transform="translate(830 70) rotate(10) scale(1.2)" fill="url(#lg2)"/><use href="#lf2" transform="translate(260 300) rotate(40) scale(0.9)" fill="url(#lg2)"/><use href="#lf2" transform="translate(380 265) rotate(35) scale(1)" fill="url(#lg2)"/><use href="#lf2" transform="translate(500 220) rotate(45) scale(1.1)" fill="url(#lg2)"/><use href="#lf2" transform="translate(620 175) rotate(30) scale(1.2)" fill="url(#lg2)"/><use href="#lf2" transform="translate(740 130) rotate(40) scale(1.1)" fill="url(#lg2)"/></svg></div>
+
+<div class="app">
+<header class="hero">
+  <div>
+    <div class="brand"><div class="disc" id="disc"></div><div><div class="round">Write &amp; Shine 4</div><div class="sub">Luyện viết mở rộng câu · Ngữ pháp New Round-Up 1–4</div></div></div>
+    <h1 id="uh"></h1>
+    <p id="prompt"></p>
+  </div>
+  <div class="ladder" id="rungs" aria-label="Thang mở rộng câu"></div>
+</header>
+<nav class="steps" aria-label="Các phần">
+  <a class="home" href="index.html">← Mục lục</a><a href="#grammar">1 · Ngữ pháp</a><a href="#words">2 · Hộp từ</a><a href="#ladder">3 · Thang câu</a><a href="#write">4 · Viết bài</a><a href="#check">5 · Tự kiểm tra</a>
+</nav>
+
+<section id="grammar">
+  <h2>1. Ngữ pháp con sẽ dùng</h2>
+  <p class="lead">Phần nào con đã biết thì bấm <b>“Con biết rồi”</b> để bỏ qua. Phần nào chưa chắc thì bấm <b>“Xem giải thích”</b>. Ghi chú nhỏ cho biết phần đó nằm ở unit nào trong sách New Round-Up (NRU).</p>
+  <div class="grid" id="gcards"></div>
+  <div class="next"><a class="go" href="#words">Tiếp theo: Hộp từ →</a></div>
+</section>
+
+<section id="words">
+  <h2>2. Hộp từ</h2>
+  <p class="lead">Con chỉ cần dùng <b>vài từ</b> trong hộp này là bài viết đã sinh động hơn rồi. Bấm vào từ để nghe đọc.</p>
+  <div class="grp" id="lAdj"></div><div class="words" id="wAdj"></div>
+  <div class="grp" id="lAdv"></div><div class="words" id="wAdv"></div>
+  <div class="grp" id="lCon"></div><div class="words" id="wCon"></div>
+  <div class="next"><a class="go" href="#ladder">Tiếp theo: Thang câu →</a></div>
+</section>
+
+<section id="ladder">
+  <h2>3. Leo thang câu</h2>
+  <p class="lead">Mỗi bậc học một cách làm câu dài hơn. Con làm xong bấm <b>Kiểm tra</b>.</p>
+  <div id="steps"></div>
+  <div class="step card">
+    <h3><i>★</i>Câu của con lớn dần</h3>
+    <p class="hint" id="growHint"></p>
+    <div class="mine" id="grow"></div>
+  </div>
+  <div class="next"><a class="go" href="#write">Tiếp theo: Viết bài →</a></div>
+</section>
+
+<section id="write">
+  <h2 id="wTitle"></h2>
+  <p class="lead" id="wLead"></p>
+  <div class="cols">
+    <div class="card">
+      <h3>Dàn ý (Plan)</h3>
+      <div class="plan" id="plan"></div>
+      <div class="row" style="margin-top:12px"><button id="mBtn" disabled>Xem đoạn mẫu</button><button id="m2Btn" disabled>Xem đoạn mẫu nâng cấp</button></div>
+    </div>
+    <div>
+      <div class="model" id="m1"><b class="lbl" id="m1l"></b><p id="m1t"></p></div>
+      <div class="model" id="m2"><b class="lbl">Đoạn mẫu nâng cấp</b><p id="m2t"></p>
+        <table class="cmp"><thead><tr><th>Câu đơn</th><th>Câu đã mở rộng</th></tr></thead><tbody id="cmp"></tbody></table>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h3><label for="essay">Bài viết của con</label></h3>
+    <p class="hint" id="eHint"></p>
+    <textarea id="essay"></textarea>
+    <div class="stats" id="stats"></div>
+    <div class="grp">Bài của con được tô màu:</div>
+    <div class="preview" id="preview"></div>
+  </div>
+  <div class="next"><a class="go" href="#check">Tiếp theo: Tự kiểm tra →</a></div>
+</section>
+
+<section id="check">
+  <h2>5. Tự kiểm tra</h2>
+  <p class="lead">Danh sách này tự cập nhật khi con viết. Mục nào chưa có dấu ✓ thì con sửa bài nhé.</p>
+  <ul class="checks" id="checks"></ul>
+  <p class="score" id="score"></p>
+  <div class="next" id="nextUnit"></div>
+</section>
+<div class="foot" id="foot"></div>
+</div>
+
+<script>
+{
+const D={"n": 17, "title": "In the city", "journal": "my city", "book": "SGK tập hai", "prompt": "Đề: Giới thiệu thành phố con sống hoặc từng đến thăm: thành phố thế nào, có địa danh nổi tiếng nào, được xây khi nào và đường đi đến đó.", "task": "Con dùng câu bị động (is / was + V3) để giới thiệu địa danh, câu mệnh lệnh để chỉ đường, và câu hỏi đuôi ở cuối bài. Viết 3 đoạn: mở bài (1–2 câu), thân bài (kể chi tiết), kết bài (cảm nghĩ).", "rungs": ["Ha Noi is a city.", "Ha Noi is a <mark class=\"m-adj\">busy</mark> and <mark class=\"m-adj\">modern</mark> city.", "The Temple of Literature <mark class=\"m-very\">was built</mark> in 1070.", "Go straight and turn left <mark class=\"m-very\">at the traffic lights</mark>.", "Ha Noi is wonderful, <mark class=\"m-con\">isn’t it</mark>?"], "grammar": [{"t": "Câu bị động hiện tại: is / are + V3", "r": "NRU3 Unit 17 · NRU4 Unit 12", "b": "<p>Dùng khi muốn nói về <b>vật được làm</b>, không quan trọng ai làm.</p><div class=\"ex\">The streets <b>are cleaned</b> every morning.</div><div class=\"ex\">Pho <b>is sold</b> everywhere in Ha Noi.</div><div class=\"ex\">English <b>is spoken</b> in many countries.</div>"}, {"t": "Câu bị động quá khứ: was / were + V3 (by …)", "r": "NRU3 Unit 17 · NRU4 Unit 12", "b": "<div class=\"ex\">The bridge <b>was built</b> in 1902.</div><div class=\"ex\">This picture <b>was painted by</b> a famous artist.</div><p>V3 hay dùng: built, made, opened, called, visited, painted, sold, written.</p>"}, {"t": "Câu hỏi đuôi", "r": "NRU4 Unit 10", "b": "<p>Câu khẳng định → đuôi phủ định; câu phủ định → đuôi khẳng định.</p><div class=\"ex\">It’s a big city, <b>isn’t it</b>?</div><div class=\"ex\">You live near the park, <b>don’t you</b>?</div><div class=\"ex\">They can’t swim, <b>can they</b>?</div><div class=\"ex\">The bus was late, <b>wasn’t it</b>?</div>"}, {"t": "Chỉ đường và giới từ chỉ chuyển động", "r": "NRU1 Unit 9 · NRU3 Unit 9", "b": "<table><tr><td><b>go straight</b></td><td>đi thẳng</td><td><b>turn left / right</b></td><td>rẽ trái / phải</td></tr><tr><td><b>along</b> the street</td><td>dọc theo</td><td><b>across</b> the bridge</td><td>băng qua</td></tr><tr><td><b>past</b> the bank</td><td>đi qua</td><td><b>on your left</b></td><td>ở bên trái</td></tr></table><div class=\"ex\">Go straight <b>along</b> this street and turn left.</div>"}, {"t": "Mệnh đề quan hệ which (ôn lại)", "r": "NRU3 Unit 19", "b": "<div class=\"ex\">I live in Ha Noi, <b>which</b> is the capital of Viet Nam.</div>"}, {"t": "Tính từ và “very”", "r": "NRU2 Unit 20 · NRU3 Unit 20", "b": "<p>Tính từ có thể đứng ở <b>hai chỗ</b>:</p><div class=\"ex\">Trước danh từ: a <mark class=\"m-adj\">famous</mark> lake</div><div class=\"ex\">Sau am / is / are: The streets are <mark class=\"m-adj\">crowded</mark>.</div><p>Thêm <b>very</b> trước tính từ để nói mạnh hơn:</p><div class=\"ex\">It is a <mark class=\"m-very\">very</mark> old temple.</div><p>Mỗi câu chỉ cần 1–2 tính từ là đủ.</p>"}], "labels": ["Tính từ tả thành phố", "Từ chỉ đường đi", "Từ nối"], "adj": [["busy", "nhộn nhịp"], ["crowded", "đông đúc"], ["modern", "hiện đại"], ["old", "cổ, cũ"], ["famous", "nổi tiếng"], ["noisy", "ồn ào"], ["beautiful", "đẹp"], ["tall", "cao"]], "adv": [["straight", "thẳng"], ["along", "dọc theo"], ["across", "băng qua"], ["past", "đi qua"], ["on the left", "bên trái"], ["on the right", "bên phải"]], "con": [["and", "và"], ["but", "nhưng"], ["so", "nên"], ["because", "vì"], ["which", "cái mà"]], "hlAdj": ["noisy", "crowded", "peaceful", "capital"], "hlAdv": ["straight", "along", "across", "past", "on the left", "on the right", "turn left", "turn right"], "hlCon": ["which"], "steps": [{"type": "select", "t": "Câu bị động", "h": "is / are / was / were + V3", "items": [["The bridge", "built in 1902.", ["was", "is"], "was"], ["Many cars", "made in Japan.", ["are", "is"], "are"], ["This temple was", "900 years ago.", ["built", "build"], "built"], ["The streets", "cleaned every morning.", ["are", "were"], "are"]]}, {"type": "insert", "t": "Thêm tính từ", "h": "Đặt 1–2 tính từ vào chỗ ▲.", "words": ["busy", "crowded", "modern", "old", "famous", "noisy", "beautiful", "tall", "big", "clean", "quiet", "and", "great", "interesting"], "items": ["Ha Noi is a ▲ city.", "The streets are ▲.", "There is a ▲ market near my house."]}, {"type": "order", "t": "Xếp câu", "h": " Bấm vào các ô chữ theo đúng thứ tự để xếp thành câu. Bấm lại ô chữ trong khung để bỏ ra.", "items": [["Go", "straight", "and", "turn left", "at the bank", "."], ["The museum", "was opened", "in", "2010", "."], ["Ha Noi", "is beautiful,", "isn’t it", "?"]]}, {"type": "select", "t": "Câu hỏi đuôi", "h": "Khẳng định → đuôi phủ định và ngược lại.", "items": [["It’s a big city,", "it?", ["isn’t", "is"], "isn’t"], ["You live near the park,", "you?", ["don’t", "do"], "don’t"], ["They can’t swim,", "they?", ["can", "can’t"], "can"], ["The bus was late,", "it?", ["wasn’t", "was"], "wasn’t"]]}, {"type": "select", "t": "Giới từ chỉ đường", "h": "", "items": [["Walk", "the bridge.", ["across", "between"], "across"], ["Go", "the post office.", ["past", "on"], "past"], ["Walk", "this street for five minutes.", ["along", "into"], "along"], ["The bank is", "your left.", ["on", "at"], "on"]]}], "grow": [["Bậc 1 · Câu đơn", "Ha Noi is a city.", "\\bis a\\b", "i", "Viết: … is a city."], ["Bậc 2 · Thêm tính từ", "Ha Noi is a busy and modern city.", "\\b(busy|crowded|modern|old|famous|noisy|beautiful|big|quiet|clean)\\b", "i", "Thêm tính từ."], ["Bậc 3 · Câu bị động", "The Temple of Literature was built in 1070.", "\\b(is|are|was|were|isn't|aren't|wasn't|weren't) (\\w+ly )?(\\w+ed|built|made|sold|written|spoken|eaten|seen|known|found|taken|given|grown|done|kept|born|caught|hidden|drawn|worn|held|bought|left|put|cut|hit|thrown|shown|told|taught)\\b", "i", "Dùng is / was + V3."], ["Bậc 4 · Chỉ đường", "Go straight and turn left at the traffic lights.", "\\b(turn left|turn right|go straight|go along|go across|go past|walk along|walk across|walk past)\\b", "i", "Dùng go straight / turn left / walk along …"], ["Bậc 5 · Câu hỏi đuôi", "Ha Noi is wonderful, isn’t it?", ",\\s*(isn't|aren't|wasn't|weren't|don't|doesn't|didn't|can't|won't|haven't|hasn't|is|are|was|were|do|does|did|can|will|have|has) (it|he|she|they|you|we|there|I)\\s*\\?", "i", "Thêm câu hỏi đuôi: …, isn’t it?"]], "plan": [["Which city do you live in / visit?", "Con sống hoặc đến thăm thành phố nào?"], ["What is it like?", "Thành phố thế nào?"], ["What famous places are there? When were they built?", "Có địa danh nổi tiếng nào, xây khi nào?"], ["How do you get there?", "Đường đi đến đó thế nào?"], ["What do you like about the city?", "Con thích gì ở thành phố?"]], "m1label": "Đoạn mẫu cơ bản", "m1": "I live in Ha Noi. It is a big city. There are many old streets. Hoan Kiem Lake is famous. The Temple of Literature is very old. I love my city.", "m2": [["I live in Ha Noi, <mark class=\"m-con\">which</mark> is the capital of Viet Nam.", "I live in Ha Noi."], ["It is a <mark class=\"m-adj\">busy</mark> and <mark class=\"m-adj\">modern</mark> city, <mark class=\"m-con\">but</mark> it also has many <mark class=\"m-adj\">quiet</mark> <mark class=\"m-adj\">old</mark> streets.", "It is a big city. There are many old streets."], ["<br><br>The most <mark class=\"m-adj\">famous</mark> place is Hoan Kiem Lake, <mark class=\"m-con\">which</mark> is visited by many tourists every day.", "Hoan Kiem Lake is famous."], ["The red bridge over the lake is called The Huc Bridge.", ""], ["The Temple of Literature was built in 1070, <mark class=\"m-con\">so</mark> it is very <mark class=\"m-adj\">old</mark>.", "The Temple of Literature is very old."], ["To get there from my school, go <mark class=\"m-very\">straight</mark> <mark class=\"m-very\">along</mark> the main road.", ""], ["Then turn left at the traffic lights <mark class=\"m-con\">and</mark> walk for ten minutes.", ""], ["The streets are cleaned early every morning, <mark class=\"m-con\">so</mark> they are quite <mark class=\"m-adj\">clean</mark>.", ""], ["<br><br>Many <mark class=\"m-adj\">delicious</mark> dishes are sold at the night market.", ""], ["Ha Noi is a <mark class=\"m-adj\">wonderful</mark> city, isn’t it?", "I love my city."]], "minS": 10, "paras": 3, "exp": [3, 2], "placeholder": "I live in …", "checks": [{"t": "Dùng câu bị động ít nhất 2 lần.", "h": "was built, is visited, are sold…", "re": "\\b(is|are|was|were|isn't|aren't|wasn't|weren't) (\\w+ly )?(\\w+ed|built|made|sold|written|spoken|eaten|seen|known|found|taken|given|grown|done|kept|born|caught|hidden|drawn|worn|held|bought|left|put|cut|hit|thrown|shown|told|taught)\\b", "f": "i", "min": 2}, {"t": "Có câu hỏi đuôi.", "h": "…, isn’t it?", "re": ",\\s*(isn't|aren't|wasn't|weren't|don't|doesn't|didn't|can't|won't|haven't|hasn't|is|are|was|were|do|does|did|can|will|have|has) (it|he|she|they|you|we|there|I)\\s*\\?", "f": "i"}, {"t": "Có câu chỉ đường.", "h": "go straight, turn left, walk along…", "re": "\\b(turn left|turn right|go straight|straight|along|across|past)\\b", "f": "i"}, {"t": "Tên địa danh viết hoa.", "h": "Hoan Kiem Lake, Ben Thanh Market…", "re": "\\b[A-Z][a-z]+( [A-Z][a-z]+)* (Lake|Street|Bridge|Park|Market|Museum|Temple|Tower|Pagoda|Church|Square|River|Road|Zoo|Mountain|Beach)\\b", "show": false}]};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm=t=>t.replace(/[’‘]/g,"'").replace(/[“”]/g,'"');
+const rx=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const pad=n=>String(n).padStart(2,'0');
+
+/* hero */
+$('#disc').textContent=D.n;
+$('#uh').textContent=`Unit ${D.n}: ${D.title}`;
+$('#prompt').innerHTML=D.prompt;
+$('#rungs').innerHTML=D.rungs.map((r,i)=>`<div class="rung"><b class="n">${i+1}</b><span>${r}</span></div>`).join('');
+$('#foot').textContent=(D.book?D.book+' · ':'')+'Ngữ pháp theo New Round-Up 1–4. Từ vựng trình độ Pre A1–A2.';
+$('#nextUnit').innerHTML=D.n<20?`<a class="go" href="unit${pad(D.n+1)}.html">Sang Unit ${D.n+1} →</a>`:`<a class="go" href="index.html">Về mục lục →</a>`;
+
+/* 1. grammar */
+$('#gcards').innerHTML=D.grammar.map((g,i)=>`<div class="card" id="g${i}"><h3>${g.t}</h3><div class="ref">${g.r}</div><div class="row"><button class="sm" data-k="${i}">Con biết rồi</button><button class="sm" data-o="${i}" aria-expanded="false">Xem giải thích</button></div><div class="gbody">${g.b}</div></div>`).join('');
+$('#gcards').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.k){const c=$('#g'+b.dataset.k);c.classList.toggle('known');c.classList.remove('open');b.textContent=c.classList.contains('known')?'Xem lại':'Con biết rồi'}
+ if(b.dataset.o){const c=$('#g'+b.dataset.o);const o=c.classList.toggle('open');b.setAttribute('aria-expanded',o);b.textContent=o?'Ẩn giải thích':'Xem giải thích'}});
+
+/* 2. words */
+const L=D.labels||['Tính từ','Từ chỉ mức độ, thời gian, cách làm','Từ nối'];
+$('#lAdj').innerHTML=`${L[0]} <mark class="m-adj">nền xanh nhạt</mark>`;
+$('#lAdv').innerHTML=`${L[1]} <mark class="m-very">chữ xanh dương</mark>`;
+$('#lCon').innerHTML=`${L[2]} <mark class="m-con">gạch chân</mark>`;
+const chips=(a,c)=>a.map(([w,m])=>`<button class="chip ${c}" data-say="${esc(w)}"><b>${w}</b><span>${m}</span></button>`).join('');
+$('#wAdj').innerHTML=chips(D.adj,'adj');$('#wAdv').innerHTML=chips(D.adv,'very');$('#wCon').innerHTML=chips(D.con,'con');
+document.addEventListener('click',e=>{const c=e.target.closest('[data-say]');if(!c)return;try{const u=new SpeechSynthesisUtterance(c.dataset.say.replace(/…/g,''));u.lang='en-GB';u.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(_){}});
+
+/* 3. ladder */
+const shuffle=a=>{const r=a.slice();for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]]}if(r.join()===a.join())r.reverse();return r};
+const joinT=a=>a.join(' ').replace(/ ([.?!,])/g,'$1');
+$('#steps').innerHTML=D.steps.map((st,k)=>{let body='';
+ if(st.type==='select')body=`<ol class="q">${st.items.map((q,i)=>`<li>${q[0]} <select id="s${k}_${i}" aria-label="Chọn từ"><option value="">…</option>${q[2].map(o=>`<option>${o}</option>`).join('')}</select> ${q[1]}</li>`).join('')}</ol><div class="row"><button class="pri" data-sel="${k}">Kiểm tra</button><span class="fb" id="fb${k}"></span></div>`;
+ if(st.type==='insert')body=`<div class="mine">${st.items.map((t,i)=>`<div><label for="in${k}_${i}">${i+1}. ${t}</label><input type="text" id="in${k}_${i}" autocomplete="off" spellcheck="false"><div class="fb" id="if${k}_${i}"></div></div>`).join('')}</div><div class="row" style="margin-top:10px"><button class="pri" data-ins="${k}">Kiểm tra</button></div>`;
+ if(st.type==='order')body=st.items.map((q,i)=>`<div style="margin-bottom:14px"><div class="tiles ans" id="a${k}_${i}" aria-label="Câu của con"></div><div class="tiles" id="p${k}_${i}">${shuffle(q).map(w=>`<button class="tile">${w}</button>`).join('')}</div><div class="row"><button class="sm pri" data-ord="${k}_${i}">Kiểm tra</button><span class="fb" id="of${k}_${i}"></span></div></div>`).join('');
+ return `<div class="step card"><h3><i>${k+1}</i>${st.t}</h3><p class="hint">${st.h}</p>${body}</div>`}).join('');
+$('#steps').addEventListener('click',e=>{
+ const t=e.target.closest('.tile');if(t){const box=t.parentElement;const id=box.id.slice(1);(box.id[0]==='p'?$('#a'+id):$('#p'+id)).appendChild(t);return}
+ const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.sel){const k=+b.dataset.sel,st=D.steps[k];let n=0;
+  st.items.forEach((q,i)=>{const s=$(`#s${k}_${i}`);const ok=s.value===q[3];s.classList.toggle('good',ok);s.classList.toggle('wrong',!ok);if(ok)n++});
+  const f=$('#fb'+k),all=n===st.items.length;f.className='fb '+(all?'ok':'no');f.textContent=all?`Tuyệt vời! Đúng cả ${n} câu.`:`Đúng ${n}/${st.items.length}. Con xem lại các ô viền đứt nhé.`}
+ if(b.dataset.ins){const k=+b.dataset.ins,st=D.steps[k];const W=st.words.map(w=>w.toLowerCase());
+  st.items.forEach((t,i)=>{const inp=$(`#in${k}_${i}`),f=$(`#if${k}_${i}`),v=norm(inp.value).trim().replace(/\s+/g,' ');
+   const [a,z]=norm(t).split('▲');const m=v.match(new RegExp('^'+rx(a)+'(.+?)'+rx(z)+'$','i'));let ok=false,msg;
+   const cap=m?m[1].trim().toLowerCase().replace(/^(very|really|quite|so|too) /,''):'';
+   if(!v)msg='Con chưa viết câu này.';
+   else if(!m)msg='Con chép đúng câu mẫu, chỉ thêm từ vào chỗ ▲ nhé.';
+   else if(!(W.includes(cap)||cap.split(' ').every(w=>W.includes(w))))msg=`“${m[1].trim()}” chưa có trong Hộp từ. Con thử: ${st.words.slice(0,4).join(', ')}…`;
+   else if(!/^[A-Z]/.test(v))msg='Câu phải bắt đầu bằng chữ hoa.';
+   else{ok=true;msg=`Đúng rồi! Con đã thêm “${m[1].trim()}”.`}
+   inp.classList.toggle('good',ok);inp.classList.toggle('wrong',!ok);f.className='fb '+(ok?'ok':'no');f.textContent=msg})}
+ if(b.dataset.ord){const [k,i]=b.dataset.ord.split('_').map(Number);const want=D.steps[k].items[i];const got=[...$(`#a${k}_${i}`).children].map(x=>x.textContent);
+  const ok=joinT(got)===joinT(want);const f=$(`#of${k}_${i}`);f.className='fb '+(ok?'ok':'no');
+  f.textContent=ok?'Đúng rồi! '+joinT(want):(got.length<want.length?'Con dùng hết các ô chữ nhé.':'Chưa đúng thứ tự. Con thử lại nhé.')}});
+
+$('#growHint').innerHTML=D.growHint||'Bấm <b>“Chép xuống”</b> để mang câu ở bậc trên xuống, rồi thêm một chút.';
+$('#grow').innerHTML=D.grow.map((g,i)=>`<div><label for="gr${i}">${g[0]}</label> <span class="hint">Ví dụ: ${g[1]}</span><div class="row" style="flex-wrap:nowrap"><input type="text" id="gr${i}" autocomplete="off">${i?`<button class="sm" data-copy="${i}">Chép xuống</button>`:''}</div><div class="fb" id="grf${i}"></div></div>`).join('');
+function checkGrow(i){const v=norm($('#gr'+i).value).trim(),f=$('#grf'+i),g=D.grow[i];if(!v){f.textContent='';return}
+ let ok=new RegExp(g[2],g[3]||'').test(v),msg=g[4];
+ if(ok&&!/^[A-Z]/.test(v)){ok=false;msg='Bắt đầu bằng chữ hoa nhé.'}else if(ok&&!/[.!?]$/.test(v)){ok=false;msg='Nhớ dấu câu ở cuối câu.'}else if(ok)msg='Tốt lắm! Câu của con đã dài hơn.';
+ f.className='fb '+(ok?'ok':'no');f.textContent=msg}
+$('#grow').addEventListener('click',e=>{const b=e.target.closest('[data-copy]');if(!b)return;const i=+b.dataset.copy;$('#gr'+i).value=$('#gr'+(i-1)).value;$('#gr'+i).focus();checkGrow(i);save()});
+$('#grow').addEventListener('input',e=>{if(e.target.id.startsWith('gr')){checkGrow(+e.target.id.slice(2));save()}});
+
+/* 4. write */
+$('#wTitle').textContent='4. Viết bài: My journal – '+D.journal;
+const need=D.plan.length-1;
+$('#wLead').innerHTML=`${D.task} Trả lời dàn ý trước. Trả lời được ${need} câu thì con mở được đoạn mẫu. Đoạn mẫu để tham khảo thôi, con không chép nhé.`;
+$('#eHint').textContent=`Viết ít nhất ${D.minS} câu${D.paras>1?`, chia thành ${D.paras} đoạn`:''}. Bài được lưu tạm trên máy này.`;
+$('#essay').placeholder=D.placeholder||'';
+$('#plan').innerHTML=D.plan.map((p,i)=>`<div><label for="pl${i}">${i+1}. ${p[0]} <span style="font-weight:400;color:var(--muted)">– ${p[1]}</span></label><input type="text" id="pl${i}" autocomplete="off"></div>`).join('');
+$('#m1l').textContent=D.m1label||'Đoạn mẫu';$('#m1t').textContent=D.m1;
+$('#m2t').innerHTML=D.m2.map(m=>m[0]).join(' ');
+$('#cmp').innerHTML=D.m2.filter(m=>m[1]).map(m=>`<tr><td>${m[1]}</td><td>${m[0].replace(/^(<br>)+/,'')}</td></tr>`).join('');
+const planCount=()=>D.plan.filter((_,i)=>$('#pl'+i).value.trim()).length;
+function planUpd(){const ok=planCount()>=need;$('#mBtn').disabled=!ok;$('#m2Btn').disabled=!ok;$('#mBtn').textContent=ok?'Xem đoạn mẫu':`Xem đoạn mẫu (còn ${need-planCount()} câu)`;save()}
+$('#plan').addEventListener('input',planUpd);
+$('#mBtn').onclick=()=>$('#m1').classList.toggle('show');$('#m2Btn').onclick=()=>$('#m2').classList.toggle('show');
+
+/* highlight + checks */
+const BASEADJ=['new','kind','friendly','funny','clever','tall','short','happy','nice','good','great','beautiful','big','small','busy','lovely','delicious','interesting','exciting','wonderful','colourful','sunny','fast','strong','quiet','old','young','long','hot','cold','warm','tired','favourite','easy','difficult','sweet','large','clean','modern','brave','careful','healthy','famous','huge','tiny','wild','gentle','bright','comfortable','cheap','expensive','crowded','amazing','fresh','proud','excited','helpful','important','useful'];
+const ADJW=[...new Set([...BASEADJ,...D.adj.map(a=>a[0].toLowerCase()),...(D.hlAdj||[])])];
+const ADVW=[...new Set([...D.adv.map(a=>a[0].toLowerCase().replace(/…/g,'').trim()),...(D.hlAdv||[]),'very'])];
+const CONW=[...new Set([...D.con.map(a=>a[0].toLowerCase().replace(/…/g,'').trim()),...(D.hlCon||[]),'and','but','so','because'])];
+const KIND={};ADJW.forEach(w=>KIND[w]='m-adj');ADVW.forEach(w=>KIND[w]='m-very');CONW.forEach(w=>KIND[w]='m-con');
+const TERMS=Object.keys(KIND).sort((a,b)=>b.length-a.length);
+const HL=new RegExp('\\b('+TERMS.map(rx).join('|')+')\\b','gi');
+const hl=t=>esc(t).replace(HL,m=>`<mark class="${KIND[m.toLowerCase()]}">${m}</mark>`);
+const sentences=t=>(t.match(/[^.!?]+[.!?]+["']?/g)||[]).map(s=>s.trim()).filter(Boolean);
+const count=(t,re,f)=>(t.match(new RegExp(re,'g'+(f||'')))||[]).length;
+const LOWI=/(^|[^A-Za-z'])i([^A-Za-z']|$)/;
+function analyse(raw){const t=norm(raw),S=sentences(t),low=(t.toLowerCase().match(/[a-z']+/g)||[]);
+ const rest=t.replace(/[^.!?]+[.!?]+["']?/g,'').trim();
+ const adj=new Set(low.filter(w=>ADJW.includes(w)));
+ const con=count(t,'\\b('+CONW.map(rx).join('|')+')\\b','i');
+ const R=[
+  ['g',`Viết ít nhất ${D.minS} câu.`,`Con đã viết ${S.length} câu.`,S.length>=D.minS],
+  ['g','Mỗi câu bắt đầu bằng chữ hoa. Chữ I luôn viết hoa.','',S.length>0&&S.every(s=>/^["']?[A-Z0-9]/.test(s))&&!LOWI.test(t)],
+  ['g','Mỗi câu kết thúc bằng . ? hoặc !',rest?`Đoạn chưa có dấu cuối: “${rest.slice(0,30)}…”`:'',S.length>0&&!rest]];
+ if(D.paras>1){const P=raw.split(/\n\s*\n|\n/).filter(p=>p.trim()).length;R.push(['g',`Chia bài thành ${D.paras} đoạn (xuống dòng giữa các đoạn).`,`Con đã có ${P} đoạn.`,P>=D.paras])}
+ D.checks.forEach(c=>{let ok=true,n=null;
+  if(c.re){n=count(t,c.re,c.f);ok=n>=(c.min||1)}
+  if(c.all)ok=ok&&c.all.every(r=>new RegExp(r,c.f||'').test(t));
+  if(c.bad&&new RegExp(c.bad,c.bf||'').test(t))ok=false;
+  if(c.digits&&/\d/.test(t))ok=false;
+  R.push(['u',c.t,(c.h||'')+(n!==null&&c.show!==false?` (con đã có ${n})`:''),ok])});
+ R.push(['n',`Dùng ít nhất ${D.exp[0]} tính từ khác nhau.`,adj.size?`Con đã dùng: ${[...adj].join(', ')}`:'Xem lại Hộp từ nhé.',adj.size>=D.exp[0]]);
+ R.push(['n',`Nối ý ít nhất ${D.exp[1]} lần bằng từ nối.`,`Từ nối của unit này: ${D.con.map(c=>c[0]).join(', ')}. Con đã nối ${con} lần.`,con>=D.exp[1]]);
+ return R}
+const GRP={g:'Tiêu chí chung',u:`Tiêu chí riêng của Unit ${D.n}`,n:'Tiêu chí mở rộng câu'};
+function upd(){const t=$('#essay').value;$('#preview').innerHTML=t.trim()?hl(t):'<span style="color:var(--muted)">Bài của con sẽ hiện ở đây, các từ hay được tô màu.</span>';
+ const S=sentences(norm(t)),W=t.match(/[A-Za-z']+/g)||[];$('#stats').innerHTML=`<span>${S.length} câu</span><span>${W.length} từ</span><span>${S.length?(W.length/S.length).toFixed(1):0} từ / câu</span>`;
+ const R=analyse(t);let last='',html='';R.forEach(r=>{if(r[0]!==last){html+=`<li class="grp" style="background:none;border:0;padding:4px 0 0;display:block">${GRP[r[0]]}</li>`;last=r[0]}html+=`<li class="${r[3]?'pass':''}"><span class="st">${r[3]?'✓':''}</span><div>${r[1]}<small>${esc(r[2]||'')}</small></div></li>`});
+ $('#checks').innerHTML=html;const n=R.filter(r=>r[3]).length;$('#score').textContent=`Con đạt ${n}/${R.length} tiêu chí`+(n===R.length?' – xuất sắc!':'');save()}
+$('#essay').addEventListener('input',upd);
+
+const KEY='ws4-u'+D.n;
+function save(){try{localStorage.setItem(KEY,JSON.stringify({e:$('#essay').value,p:D.plan.map((_,i)=>$('#pl'+i).value),g:D.grow.map((_,i)=>$('#gr'+i).value)}))}catch(_){}}
+try{const d=JSON.parse(localStorage.getItem(KEY)||'null');if(d){$('#essay').value=d.e||'';(d.p||[]).forEach((v,i)=>{if($('#pl'+i))$('#pl'+i).value=v});(d.g||[]).forEach((v,i)=>{if($('#gr'+i)){$('#gr'+i).value=v;checkGrow(i)}})}}catch(_){}
+planUpd();upd();
+
+/* tabs */
+const TABS=['grammar','words','ladder','write','check'];
+function show(){const h=location.hash.slice(1);const id=TABS.includes(h)?h:'grammar';
+ TABS.forEach(t=>{document.getElementById(t).hidden=t!==id});
+ document.querySelectorAll('nav.steps a:not(.home)').forEach(a=>{const on=a.getAttribute('href')==='#'+id;a.classList.toggle('on',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+ const nav=document.querySelector('nav.steps');if(window.scrollY>nav.offsetTop)window.scrollTo(0,nav.offsetTop)}
+addEventListener('hashchange',show);show();
+}
+</script>
+</body>
+</html>
